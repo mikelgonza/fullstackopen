@@ -1,0 +1,11 @@
+note over browser:
+browser post new note
+[{content: "Hii", date: "2021-08-02T22:46:51.082Z"}] 
+end note
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over server:
+server response with 201 Created code,
+No redirection, and stay on the same page
+end note
+server-->browser: {"message":"note created"}
