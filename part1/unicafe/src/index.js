@@ -5,7 +5,12 @@ const DisplayTitle = ({title}) => <h1>{title}</h1>
 
 const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
 
-const Statistic = ({text, value}) => <div>{text} {value}</div>
+const Statistic = ({text, value}) => (
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
+)
 
 const Statistics = (props) => {
 
@@ -15,12 +20,16 @@ const Statistics = (props) => {
   else {
     return(
       <div>
-        <Statistic text='Good' value={props.good} />
-        <Statistic text='Neutral' value={props.neutral} />
-        <Statistic text='Bad' value={props.bad} />
-        <Statistic text='All' value={props.all} />
-        <Statistic text='Avergae' value={props.average} />
-        <Statistic text='Positive' value={props.positive} />
+        <table>
+          <tbody>
+            <Statistic text='Good' value={props.good} />
+            <Statistic text='Neutral' value={props.neutral} />
+            <Statistic text='Bad' value={props.bad} />
+            <Statistic text='All' value={props.all} />
+            <Statistic text='Avergae' value={props.average} />
+            <Statistic text='Positive' value={props.positive} />
+          </tbody>
+        </table>
       </div>
     )
   }
