@@ -5,20 +5,25 @@ const DisplayTitle = ({title}) => <h1>{title}</h1>
 
 const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
 
-const Statistic = ({text, value}) => <div>{text} {value}</div>
+//const Statistic = ({text, value}) => <div>{text} {value}</div>
 
 const Statistics = (props) => {
 
-  return(
-    <div>
-      <div>Good {props.good}</div>
-      <div>Neutral {props.neutral}</div>
-      <div>Bad {props.bad}</div>
-      <div>All {props.all}</div>
-      <div>Average {props.average}</div>
-      <div>Positive {props.positive} %</div>
-    </div>
-  )
+  if (props.good === 0 && props.neutral === 0 && props.bad === 0) {
+    return <div>No feedback given</div>
+  }
+  else {
+    return(
+      <div>
+        <div>Good {props.good}</div>
+        <div>Neutral {props.neutral}</div>
+        <div>Bad {props.bad}</div>
+        <div>All {props.all}</div>
+        <div>Average {props.average}</div>
+        <div>Positive {props.positive} %</div>
+      </div>
+    )
+  }
 }
 
 const App = () => {
