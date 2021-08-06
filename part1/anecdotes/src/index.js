@@ -34,7 +34,10 @@ const App = (props) => {
   }
 
   const handleAnecdoteClick = () => {
-    const random = Math.floor(Math.random() * anecdotes.length)
+    let random = Math.floor(Math.random() * anecdotes.length)
+    while (random === selected){
+      random = Math.floor(Math.random() * anecdotes.length)
+    }
     setSelected(random)
   }
 
