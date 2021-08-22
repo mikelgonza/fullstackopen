@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
@@ -10,7 +13,6 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newSearch, setNewSearch ] = useState('')
-  const [ personsFiltered, setPersonFiltered ] = useState(persons)
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -38,43 +40,31 @@ const App = () => {
 
   const handleSearchChange = (event) => {
     setNewSearch(event.target.value)
-    const filter = persons.filter(person => person.name.toLowerCase().includes(event.target.value.toLowerCase()))
-    setPersonFiltered(filter)
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>
-        filter shown with
-        <input value={newSearch} onChange={handleSearchChange} />
-      </div>
-      <h2>add a new</h2>
-      <form onSubmit={addPerson} >
-        <div>
-          name:
-          <input
-            value={newName}
-            onChange={handlePersonChange}
-          />
-        </div>
-        <div>
-          number:
-          <input
-            value={newNumber}
-            onChange={handleNumberChange}
-          />
-        </div>
-        <div>
-          <button type="submit" >add</button>
-        </div>
-      </form>
+
+      <Filter value={newSearch} onChange={handleSearchChange} />
+
+      <h2>Add a new</h2>
+
+      <PersonForm 
+        onSubmit={addPerson}
+        nameValue={newName}
+        nameOnChange={handlePersonChange}
+        numberValue={newNumber}
+        numberOnChange={handleNumberChange}
+      />
+
       <h2>Numbers</h2>
-      {personsFiltered.map(person =>
-        <div key={person.name} >
-          {person.name} {person.number}
-        </div>
-      )}
+      
+      <Persons
+        persons={persons}
+        newSearch={newSearch}
+      />
+
     </div>
   )
 }
