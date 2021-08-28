@@ -1,39 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Country from './Country'
+
+
 
 const Countries = ({countries, newSearch}) => {
+    const [ showCountry, setShowCountry ] = useState('')
 
     const filter = countries.filter(country => country.name.toLowerCase().includes(newSearch.toLowerCase()))
   
     if (filter.length > 10) {
-        
+
       return <div>Too many matches, specify another filter</div>
 
     } else if (filter.length === 1) {
-      return (
-        <div>
-            <div>
-              <h1>{filter[0].name}</h1>
-              <div>Capital: {filter[0].capital}</div>
-              <div>Population: {filter[0].population}</div>
-              <h3>Languages</h3>
-              <ul>
-                {filter[0].languages.map(language =>
-                  <li key={language.name}>{language.name}</li>
-                )}
-              </ul>
-              <img src={filter[0].flag} alt='Flag' width='100px' />
-            </div>
-        </div>      
-      )
+      return <Country country={filter[0]} />
     }
-  
+
     return (
       <div>
         {filter.map(country =>
           <div key={country.name} >
             {country.name}
+            <button onClick={() => setShowCountry(country)}>Show</button>
           </div>
         )}
+        {showCountry ? <Country country={showCountry} /> : <div></div> }
       </div>
     )
   }
